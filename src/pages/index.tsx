@@ -7,8 +7,7 @@ const Button = styled('button', {
 export default function Home() {
   return (
     <Button>
-      <span>lalala </span>
-      Hello World
+      <div>testando 1 2 3</div>
     </Button>
   )
 }
