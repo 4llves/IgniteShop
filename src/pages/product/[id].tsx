@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import {
   ImageContainer,
   ProductContainer,
@@ -6,7 +6,7 @@ import {
 } from '../../styles/pages/product'
 
 export default function Success() {
-  const { query } = useRouter()
+  // const { query } = useRouter()
 
   return (
     <ProductContainer>
