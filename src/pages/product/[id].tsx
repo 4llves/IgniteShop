@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { useRouter } from 'next/router'
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import {
   ImageContainer,
   ProductContainer,
@@ -39,13 +40,24 @@ export default function Success({ product }: ProductProps) {
   )
 }
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      {
+        params: { id: 'prod_QXM2IYm676Vchm' },
+      },
+    ],
+    fallback: false,
+  }
+}
+
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
 }) => {
-  const productId = params.id
+  const productId = params!.id
 
   const product = await stripe.products.retrieve(productId, {
-    expannd: ['default_price'],
+    expand: ['default_price'],
   })
 
   const price = product.default_price as Stripe.Price
