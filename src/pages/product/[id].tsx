@@ -18,6 +18,7 @@ interface ProductProps {
     imageUrl: string
     price: string
     description: string
+    defaultPriceId: string
   }
 }
 
@@ -27,6 +28,10 @@ export default function Success({ product }: ProductProps) {
 
   if (isFallback) {
     return 'Loading...'
+  }
+
+  function handlerBuyProduct() {
+    console.log(product.defaultPriceId)
   }
 
   return (
@@ -40,7 +45,7 @@ export default function Success({ product }: ProductProps) {
         <span>{product.price}</span>
         <p>{product.description}</p>
 
-        <button>Comprar agora</button>
+        <button onClick={handlerBuyProduct}>Comprar agora</button>
       </ProductDetails>
     </ProductContainer>
   )
@@ -81,6 +86,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
           currency: 'BRL',
         }).format((price.unit_amount as number) / 100),
         description: product.description,
+        defaultPriceId: price.id,
       },
     },
     revalidate: 60 * 60 * 1, // 1 hour save in chache
